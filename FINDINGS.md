@@ -4,7 +4,7 @@ All four were found on **Dolibarr `25.0.0-alpha`** (develop branch, commit `ab7e
 hardened production profile (install lock on, production mode, HTTPS forced, CSRF strictest) and
 reproduced end-to-end on an isolated Docker instance. **Fixed in Dolibarr 24.0.0.** CVE-2026-71506
 is additionally present in released **23.0.3**. CVEs assigned via VulnCheck (CNA). Each finding
-ships a self-contained PoC in `exploit.py` / `exploit.php` / `exploit.sh`.
+ships a self-contained PoC in `exploit.py` / `exploit.sh`.
 
 ---
 

@@ -25,8 +25,8 @@ for prof in "${PROFILES[@]}"; do
     cve="${entry%%:*}"; d="$HERE/${entry#*:}"
     echo "### profile[$prof] $cve — one reinstall, 3 langs (unique fixtures)" >&2
     bash "$LAB" $prof >/dev/null 2>&1
-    for L in py sh php; do
-      case "$L" in py) x=(python3 "$d/exploit.py");; sh) x=(bash "$d/exploit.sh");; php) x=(php "$d/exploit.php");; esac
+    for L in py sh; do
+      case "$L" in py) x=(python3 "$d/exploit.py");; sh) x=(bash "$d/exploit.sh");; esac
       uniq=()
       case "$cve" in
         71510) uniq=(--victim-login "victim_$L");;

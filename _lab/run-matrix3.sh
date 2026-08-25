@@ -28,8 +28,8 @@ for prof in "${PROFILES[@]}"; do
   bash "$LAB" $prof >/dev/null 2>&1
   for entry in "${SLUGS[@]}"; do
     cve="${entry%%:*}"; d="$HERE/${entry#*:}"
-    for L in py sh php; do
-      case "$L" in py) x=(python3 "$d/exploit.py");; sh) x=(bash "$d/exploit.sh");; php) x=(php "$d/exploit.php");; esac
+    for L in py sh; do
+      case "$L" in py) x=(python3 "$d/exploit.py");; sh) x=(bash "$d/exploit.sh");; esac
       uniq=(); case "$cve" in 71510) uniq=(--victim-login "victim_$L");; 71505) uniq=(--portal-login "portal_$L");; esac
       t0=$(now); out=$("${x[@]}" --url "$URL" "${uniq[@]}" --json 2>/dev/null); rc=$?; t1=$(now)
       printf '%s,%s,%s,%s,%s,%.1f\n' "${prof// /-}" "$cve" "$L" "$rc" "$(printf '%s' "$out" | vpass)" \

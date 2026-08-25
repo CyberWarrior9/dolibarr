@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Robustness matrix: 3 hardening profiles (same build ab7e604, same endpoint :18080) x
-# 4 CVEs x 3 languages (python/php/sh). Reinstalls the lab fresh before each CVE, runs each
+# 4 CVEs x 2 languages (python/sh). Reinstalls the lab fresh before each CVE, runs each
 # language variant, and records verdict + exit code + wall time. Prints a per-language
 # accuracy/stability summary.
 set -uo pipefail
@@ -8,7 +8,6 @@ HERE="$(cd "$(dirname "$0")/.." && pwd)"
 LAB="$HERE/_lab/reinstall.sh"
 OUT="$HERE/RESULTS.csv"
 HOST_URL='http://127.0.0.1:18080'          # python + bash run on the host
-PHP_URL='http://host.docker.internal:18080'  # php runs in a php:8.2-cli container
 
 declare -a PROFILES=("1 3 1" "0 0 0" "1 1 1")   # https csrf prod
 declare -a SLUGS=(
@@ -48,7 +47,6 @@ for prof in "${PROFILES[@]}"; do
     echo "### profile[$prof] $cve — fresh reinstall + retry-once per language" >&2
     [ -f "$d/exploit.py" ]  && run "$prof" "$cve" "$slug" py  python3 "$d/exploit.py" --url "$HOST_URL"
     [ -f "$d/exploit.sh" ]  && run "$prof" "$cve" "$slug" sh  bash    "$d/exploit.sh" --url "$HOST_URL"
-    [ -f "$d/exploit.php" ] && run "$prof" "$cve" "$slug" php php "$d/exploit.php" --url "$HOST_URL"
   done
 done
 
