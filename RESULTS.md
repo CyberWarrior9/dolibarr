@@ -30,7 +30,7 @@ occasionally completes only partially, so a reinstall reports "ready" while the 
 incomplete. That makes any one automated matrix pass flaky — **but it fails both languages equally**,
 and a `docker compose restart` + one clean install clears it. So the flakiness measures the *test
 harness hammering one container*, not the exploits. On a clean install the scripts are 100%.
-(`run-matrix3.sh` restarts the container per profile to avoid this; `RESULTS.csv` holds the raw rows.)
+(`run-matrix3.sh` restarts the container per profile to avoid this.)
 
 ## Ease of exploiting & deploying (the deciding factor)
 

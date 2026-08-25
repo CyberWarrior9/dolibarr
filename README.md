@@ -54,6 +54,6 @@ bash     <cve-dir>/exploit.sh           # bash + curl only, no jq
 `_lab/reinstall.sh <https 0|1> <csrf 0|1|3> <prod 0|1>` rebuilds a clean Dolibarr
 `25.0.0-alpha @ ab7e604` on `:18080` with the required modules, the admin key, and the four
 attacker keys. `_lab/run-matrix.sh` rebuilds under three hardening profiles and runs all eight
-scripts, scoring accuracy and stability per language (see `RESULTS.csv`).
+scripts, scoring accuracy and stability per language.
 
 Author: **CodeAnt AI Security Research** &lt;securityresearch@codeant.ai&gt;
